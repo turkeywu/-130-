@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>佳里國小一百三十週年校慶：給母校的一封信 互動寫作學習單</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            background: linear-gradient(180deg, #EFF6FF 0%, #FEF9C3 50%, #FFF7ED 100%); 
+            min-height: 100vh;
+        }
+        .serif-font {
+            font-family: 'Noto Serif TC', serif;
+        }
+        /* 拍立得手帳風卡片 */
+        .polaroid-card {
+            background-color: #FFFFFF;
+            border-radius: 1.75rem;
+            box-shadow: 0 20px 30px -10px rgba(0, 45, 98, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border: 8px solid #FFFFFF;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+        .polaroid-card:hover {
+            box-shadow: 0 25px 35px -8px rgba(0, 45, 98, 0.15);
+        }
+        /* 手帳文青紙膠帶效果 */
+        .tape-effect {
+            position: relative;
+        }
+        .tape-effect::after {
+            content: '';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2.5deg);
+            width: 140px;
+            height: 28px;
+            background-color: rgba(245, 158, 11, 0.65);
+            backdrop-filter: blur(2px);
+            border-left: 4px dashed rgba(217, 119, 6, 0.8);
+            border-right: 4px dashed rgba(217, 119, 6, 0.8);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
+            z-index: 20;
+        }
+        .tape-stamp {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            width: 95px;
+            height: 95px;
+            border: 3px double #EF4444;
+            border-radius: 50%;
+            color: #DC2626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transform: rotate(-12deg);
+            opacity: 0.75;
+            font-weight: 900;
+            font-size: 0.75rem;
+            line-height: 1.1;
+            pointer-events: none;
+            letter-spacing: 1px;
+            text-align: center;
+            background: rgba(254, 242, 242, 0.4);
+        }
+        /* 導覽按鈕動態 */
+        .nav-link { 
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+            border-left: 6px solid transparent; 
+        }
+        .nav-link.active { 
+            border-left-color: #0284C7; 
+            background-color: #F0F9FF; 
+            font-weight: 700; 
+            color: #0369A1; 
+            transform: scale(1.02) translateX(4px);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12);
+        }
+        /* 圖表外框手帳虛線 */
+        .chart-container { 
+            position: relative;
+            height: 340px; 
+            width: 100%;
+            background: #FFFFFF; 
+            border-radius: 1.5rem; 
+            padding: 1rem; 
+            border: 2px dashed #BAE6FD;
+        }
+        /* 信件書寫感底線效果 */
+        .letter-paper {
+            background-color: #FAFBFD;
+            background-image: linear-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+            background-size: 100% 2.2rem;
+            line-height: 2.2rem;
+            border: 1px solid #E2E8F0;
+        }
+        .essay-highlight {
+            background: linear-gradient(120deg, rgba(253, 224, 71, 0.6) 0%, rgba(253, 224, 71, 0.9) 100%);
+            border-radius: 4px;
+            padding: 1px 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-16 relative overflow-x-hidden">
+
+    <!-- 漂浮校園校慶元素 -->
+    <div class="fixed top-8 left-6 text-5xl opacity-20 select-none pointer-events-none transform -rotate-12 animate-pulse">🌳</div>
+    <div class="fixed top-32 right-10 text-5xl opacity-20 select-none pointer-events-none transform rotate-12">🏃‍♂️</div>
+    <div class="fixed top-1/2 left-8 text-4xl opacity-15 select-none pointer-events-none transform rotate-45">🎉</div>
+    <div class="fixed top-2/3 right-8 text-5xl opacity-20 select-none pointer-events-none transform -rotate-12">📚</div>
+    <div class="fixed bottom-12 left-16 text-5xl opacity-15 select-none pointer-events-none">🏫</div>
+    <div class="fixed top-12 right-1/4 text-5xl opacity-20 select-none pointer-events-none">🎈</div>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl relative z-10">
+        
+        <!-- 校慶手帳風頂部橫幅 -->
+        <header class="text-center mb-8 relative max-w-4xl mx-auto pt-6 pb-4">
+            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-rose-500 text-white text-xs md:text-sm font-black px-5 py-2 rounded-full uppercase tracking-wider shadow-md transform -rotate-1 hover:rotate-0 transition-transform">
+                <span>🎂 欣逢 130 歲華誕</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                <span>世紀佳小．卓越薪傳</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-sky-950 mt-4 tracking-tight drop-shadow-sm serif-font">
+                🏫 給母校的一封信：校慶寫作教室
+            </h1>
+            <p class="mt-3 text-base md:text-lg text-sky-800 font-medium">
+                六年級感恩書信專題：提煉校園角落記憶，化作真摯的生日頌歌
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <!-- 左側：範本選單與核心理念導覽 -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white/95 backdrop-blur-md p-5 rounded-3xl shadow-xl border border-sky-100 sticky top-6">
+                    <h3 class="text-lg font-black text-sky-950 mb-4 border-b border-sky-100 pb-3 flex items-center justify-between">
+                        <span class="flex items-center gap-2">📑 範本主題選單</span>
+                        <span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full">3 篇範本</span>
+                    </h3>
+                    
+                    <!-- 範本選單切換按鈕區 -->
+                    <nav id="nav-tabs" class="flex flex-col space-y-2.5">
+                        <!-- 由 JavaScript 動態生成導覽項目 -->
+                    </nav>
+
+                    <!-- 書信核心結構指引卡片 -->
+                    <div class="mt-6 p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-200/80 text-xs text-amber-950 leading-relaxed space-y-2">
+                        <span class="font-bold flex items-center gap-1 text-sm text-amber-900">
+                            <span>📮</span> 書信體例寫作小叮嚀
+                        </span>
+                        <ul class="list-disc list-inside space-y-1 text-amber-800/90 pl-1">
+                            <li><strong>稱謂頂格：</strong>「親愛的佳里國小：」以真誠問候開頭。</li>
+                            <li><strong>起承轉合：</strong>從歲月感悟、角落回憶、感謝師長到校慶祝願。</li>
+                            <li><strong>署名與日期：</strong>文末右側署名與敬詞，並端正寫明慶典日期。</li>
+                        </ul>
+                    </div>
+
+                    <!-- 快速跳轉快捷工具箱 -->
+                    <div class="mt-4 pt-4 border-t border-sky-100 text-xs text-slate-500 flex justify-between items-center px-1">
+                        <span>佳里國小 130 週年校慶</span>
+                        <span class="font-semibold text-sky-700">2026.10.14</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右側：內容展示、拍立得範文、素材箱與互動圖表 -->
+            <div class="lg:col-span-3">
+                <main id="content-display" class="polaroid-card p-5 md:p-9 transition-all duration-300 border-t-8 border-sky-500 relative">
+                    
+                    <!-- 頂部標題、主題風格標籤與閱讀小工具 -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm" id="section-badge"></span>
+                                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-full" id="section-spotlight"></span>
+                            </div>
+                            <h2 id="section-title" class="text-2xl md:text-3xl font-black text-sky-950 serif-font"></h2>
+                            <p id="section-goal" class="text-sm md:text-base text-slate-600 mt-1 pl-2 border-l-4 border-amber-400"></p>
+                        </div>
+
+                        <!-- 閱讀輔助工具列 (朗讀、複製、字級) -->
+                        <div class="flex items-center gap-2 flex-wrap self-start md:self-center bg-slate-50 p-2 rounded-2xl border border-slate-200">
+                            <!-- 語音朗讀按鈕 -->
+                            <button id="btn-speak" onclick="toggleSpeech()" class="px-3 py-1.5 bg-white hover:bg-sky-50 text-sky-700 border border-sky-200 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+                                <span id="speak-icon">🔊</span>
+                                <span id="speak-text">朗讀範文</span>
+                            </button>
+                            <!-- 一鍵複製全文 -->
+                            <button onclick="copyLetterContent()" class="px-3 py-1.5 bg-white hover:bg-amber-50 text-amber-800 border border-amber-200 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+                                <span>📋</span>
+                                <span>複製信件</span>
+                            </button>
+                            <!-- 字級切換 -->
+                            <div class="flex items-center bg-white border border-slate-200 rounded-xl overflow-hidden px-1">
+                                <button onclick="changeFontSize(-1)" class="px-2 py-1 text-xs font-bold text-slate-600 hover:text-sky-600" title="縮小字體">A-</button>
+                                <span class="text-[10px] text-slate-400">|</span>
+                                <button onclick="changeFontSize(1)" class="px-2 py-1 text-xs font-bold text-slate-600 hover:text-sky-600" title="放大字體">A+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 素材百寶箱 (手帳膠帶造型卡片) -->
+                    <div class="bg-amber-50/80 backdrop-blur-sm p-6 rounded-3xl mb-8 border border-amber-200/80 shadow-inner relative tape-effect">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg md:text-xl font-black text-amber-950 flex items-center gap-2">
+                                <span>🎁</span> 本篇寫作精華素材百寶箱
+                            </h3>
+                            <span class="text-xs text-amber-800 bg-amber-200/60 px-2.5 py-1 rounded-full font-medium">六星級佳句庫</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm">
+                            <div class="space-y-4">
+                                <div class="bg-white/90 p-4 rounded-2xl border border-amber-200/80 shadow-sm">
+                                    <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-sky-100 text-sky-800 block w-fit mb-2">🎯 推薦句型與轉折</span>
+                                    <p id="box-sentence" class="text-sky-950 font-medium leading-relaxed"></p>
+                                </div>
+                                <div class="bg-white/90 p-4 rounded-2xl border border-amber-200/80 shadow-sm">
+                                    <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-amber-200 text-amber-900 block w-fit mb-2">📚 核心成語精選</span>
+                                    <div id="box-idioms" class="space-y-1.5 mt-2"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-white/90 p-4 rounded-2xl border border-amber-200/80 shadow-sm">
+                                    <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-rose-100 text-rose-800 block w-fit mb-2">🎨 實用修辭與感官摹寫</span>
+                                    <p id="box-rhetoric" class="text-rose-950 leading-relaxed"></p>
+                                </div>
+                                <div class="bg-white/90 p-4 rounded-2xl border border-amber-200/80 shadow-sm">
+                                    <span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-emerald-100 text-emerald-800 block w-fit mb-2">✨ 推薦佳句與情懷金句</span>
+                                    <div id="box-quotes" class="space-y-1.5 mt-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 範文展示區 (擬真信紙排版與紀念郵戳) -->
+                    <div class="mb-8 relative">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl md:text-2xl font-black text-gray-800 border-l-8 border-sky-500 pl-3 serif-font">
+                                優秀書信範文觀摩
+                            </h3>
+                            <span class="text-xs text-slate-500 italic">信件格式規範範本</span>
+                        </div>
+                        
+                        <!-- 信紙本體 -->
+                        <div class="letter-paper p-6 md:p-10 rounded-2xl shadow-sm relative overflow-hidden">
+                            <!-- 紀念鋼印郵戳 -->
+                            <div class="tape-stamp">
+                                <span>百年佳小</span>
+                                <span class="text-xs my-0.5 font-bold">130th</span>
+                                <span class="text-[9px]">2026.10.14</span>
+                            </div>
+
+                            <div id="letter-content" class="serif-font text-slate-800 tracking-wide transition-all duration-200 text-base md:text-lg">
+                                <!-- 由 JS 動態注入信件格式內文 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 結構解碼與教師小叮嚀 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <!-- 段落架構拆解 -->
+                        <div class="bg-indigo-50/70 border border-indigo-200 p-5 rounded-2xl shadow-sm">
+                            <h4 class="text-base font-black text-indigo-950 mb-3 flex items-center gap-1.5">
+                                <span>📐</span> 起承轉合結構剖析
+                            </h4>
+                            <div id="structure-breakdown" class="space-y-2 text-xs md:text-sm text-indigo-900 leading-relaxed"></div>
+                        </div>
+
+                        <!-- 教師策略叮嚀 -->
+                        <div class="bg-teal-50/80 border border-teal-200 p-5 rounded-2xl shadow-sm">
+                            <h4 class="text-base font-black text-teal-950 mb-3 flex items-center gap-1.5">
+                                <span>💡</span> 語文老師的寫作點睛小叮嚀
+                            </h4>
+                            <p id="tip-text" class="text-xs md:text-sm text-teal-950 leading-relaxed"></p>
+                            <div class="mt-4 pt-3 border-t border-teal-200/60 flex items-center gap-2 text-xs text-teal-800 font-medium">
+                                <span class="bg-teal-200/80 px-2 py-0.5 rounded-md">關鍵建議</span>
+                                <span id="tip-keyword"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 校慶寫作大數據視覺化 -->
+                    <div id="visualization-area" class="pt-6 border-t border-slate-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-base md:text-lg font-bold text-sky-950 flex items-center gap-2">
+                                <span>📊</span> 校園景點寫作與情感大數據分析
+                            </h4>
+                            <span class="text-xs text-slate-500" id="chart-subtext"></span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="essayChart"></canvas>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮動 Toast 提示框 -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-slate-900/90 text-white px-5 py-3 rounded-2xl shadow-2xl opacity-0 transform translate-y-3 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2.5 backdrop-blur-sm border border-slate-700">
+        <span id="toast-icon" class="text-xl">✨</span>
+        <span id="toast-text" class="text-sm font-medium"></span>
+    </div>
+
+    <script>
+        // 三篇完整範本與寫作素材資料庫
+        const templates = [
+            {
+                id: 't1',
+                badge: '範本一：情感溫馨版',
+                spotlight: '聚焦「大操場」與跑步記憶',
+                title: '翠綠操場上的汗水與童年同心圓',
+                goal: '透過陽光灑落的大操場與五年級大隊接力賽，抒發奔跑拚搏的勇氣、互助情誼與對母校如港灣般的深深感激。',
+                header: '親愛的佳里國小：',
+                salutation: '您好！',
+                paragraphs: [
+                    '歲月如梭，轉眼間我已經升上六年級了。光陰似箭，在您即將迎來<span class="essay-highlight">一百三十歲生日</span>的這個特別時刻，我懷著無比感恩的心，寫下這封信向您致敬。',
+                    '在廣闊的校園裡，我最喜歡的角落就是<span class="essay-highlight">翠綠的大操場</span>。每當午後的陽光灑滿跑道，陣陣歡呼聲與打球的呼喊聲便響徹雲霄。在那裡，記錄了我無數次衝刺的汗水與歡笑。記得五年級的大隊接力賽，大家一邊熱烈地互相加油，一邊全力奔跑。雖然過程緊張萬分，但正因為同心協力，我們最終贏得了榮譽。大操場不僅藏著我奮力拚搏的勇氣，也見證了我們珍貴的童年友誼。',
+                    '感謝您這座堅固而溫柔的港灣，為我們提供了優美舒適的學習環境。感謝親愛的校長、主任和老師們<span class="essay-highlight">春風化雨</span>般的教導，包容了我的懵懂與犯錯，引導我不斷成長；也感謝同學與志工爸爸媽媽們的溫暖陪伴。',
+                    '佳里國小一百三十週年校慶之際，我想獻上最真摯的祝福！祝您生日快樂、校運昌隆，祝福這座充滿愛與歡笑的校園，能繼續培育出一代又一代優秀的學子。'
+                ],
+                signature: '學生 ○○○ 敬上',
+                date: '二〇二六年十月十四日',
+                fullRawText: `親愛的佳里國小：\n您好！歲月如梭，轉眼間我已經升上六年級了。光陰似箭，在您即將迎來一百三十歲生日的這個特別時刻，我懷著無比感恩的心，寫下這封信向您致敬。\n在廣闊的校園裡，我最喜歡的角落就是翠綠的大操場。每當午後的陽光灑滿跑道，陣陣歡呼聲與打球的呼喊聲便響徹雲霄。在那裡，記錄了我無數次衝刺的汗水與歡笑。記得五年級的大隊接力賽，大家一邊熱烈地互相加油，一邊全力奔跑。雖然過程緊張萬分，但正因為同心協力，我們最終贏得了榮譽。大操場不僅藏著我奮力拚搏的勇氣，也見證了我們珍貴的童年友誼。\n感謝您這座堅固而溫柔的港灣，為我們提供了優美舒適的學習環境。感謝親愛的校長、主任和老師們春風化雨般的教導，包容了我的懵懂與犯錯，引導我不斷成長；也感謝同學與志工爸爸媽媽們的溫暖陪伴。\n佳里國小一百三十週年校慶之際，我想獻上最真摯的祝福！祝您生日快樂、校運昌隆，祝福這座充滿愛與歡笑的校園，能繼續培育出一代又一代優秀的學子。\n\n學生 ○○○ 敬上\n二〇二六年十月十四日`,
+                sentence: '<strong>【並列與轉折複句】</strong><br>「大操場不僅藏著我奮力拚搏的勇氣，也見證了我們珍貴的童年友誼。」<br>「雖然過程緊張萬分，但正因為同心協力，我們最終贏得了榮譽。」',
+                idioms: [
+                    { word: '光陰似箭 / 歲月如梭', desc: '形容時光飛快流逝，不知不覺已在校園六年。' },
+                    { word: '響徹雲霄', desc: '聲音高亢響亮，穿透雲端，精準刻劃運動會加油熱況。' },
+                    { word: '同心協力', desc: '團結一條心，共同為團隊目標奔馳衝刺。' },
+                    { word: '春風化雨', desc: '比喻師長和煦溫暖、潛移默化的培育教誨。' },
+                    { word: '校運昌隆', desc: '祝賀學校校務蒸蒸日上、蓬勃發展的專屬賀詞。' }
+                ],
+                rhetoric: '<strong>【譬喻與感官聽覺摹寫】</strong><br>將學校比喻為「堅固而溫柔的港灣」；並透過「午後陽光灑滿跑道」（視覺）配合「呼喊聲響徹雲霄」（聽覺），營造動感活力。',
+                quotes: [
+                    '「跑道上的每一道白線，都是我們向童年極限奔跑的勳章。」',
+                    '「母校是一座溫暖的港灣，任憑海風吹拂，始終守護幼苗揚帆起航。」',
+                    '「一個人可以跑得很快，但一群同心的朋友，能讓我們跑得更遠！」'
+                ],
+                structure: [
+                    { part: '【起】歲月感慨與緣起', content: '從時光飛逝切入六年級心境，開門見山點出母校迎來 130 歲校慶華誕。' },
+                    { part: '【承】焦點場景與回憶', content: '聚焦「大操場」，具體勾勒午後奔馳與大隊接力賽扣人心弦的同儕齊心過程。' },
+                    { part: '【轉】感恩師長與校園', content: '由具體運動場景昇華至深層感恩，致謝校長、老師春風化雨及志工家長的付出。' },
+                    { part: '【合】莊嚴祝願與署名', content: '獻上誠摯祝願：生日快樂、校運昌隆，期勉母校世代作育英才。' }
+                ],
+                tip: '運動場景要「動靜結合」：描寫接力賽時，先寫緊張萬分的氛圍，再寫同心協力的歡呼，最後收束在「友誼與勇氣」的成長內涵，文章層次便會格外深刻！',
+                tipKeyword: '動態畫面感 × 真摯友情提煉',
+                chartTitle: '範本一：校園回憶景點票選分布（操場篇）',
+                chartType: 'bar',
+                chartLabels: ['大操場與跑道', '兒童遊樂場', '老榕樹綠蔭', '靜謐圖書館', '林蔭大道'],
+                chartData: [48, 22, 14, 11, 5]
+            },
+            {
+                id: 't2',
+                badge: '範本二：生動活潑版',
+                spotlight: '聚焦「遊戲場」與歡笑時光',
+                title: '盪鞦韆上的童年笑聲與純真飛揚',
+                goal: '以遊樂場盪鞦韆、鬼抓人為核心鏡頭，描寫跌倒又微笑爬起的同理包容，讚頌母校如慈愛長者般撫育我們成長。',
+                header: '親愛的佳里國小：',
+                salutation: '您好！',
+                paragraphs: [
+                    '好久不見，您依然是那麼美麗而慈祥。轉眼間，我即將告別六年的小學生活。在您即將邁入<span class="essay-highlight">一百三十歲</span>的喜悅時刻，我想對您說聲：「謝謝您！」',
+                    '回首這六年，校園裡處處都有令人難忘的回憶。其中，我最鍾愛的角落非<span class="essay-highlight">遊樂場</span>莫屬。那裡充滿了歡聲笑語，風吹過樹梢傳來沙沙聲，伴隨著同學們盪鞦韆、鬼抓人的尖叫聲。記得下課時，大家一邊愉快地追逐嬉戲，一邊熱烈地討論著剛才的遊戲。儘管偶爾會摔倒或是因為小事爭執，但因為有彼此的包容與微笑，所有不快都會瞬間煙消雲散。這個角落記錄了我們最純真、最無憂無慮的時光。',
+                    '感謝學校就像一位<span class="essay-highlight">慈愛的長者</span>，陪伴我們度過歡樂與挫折。無論是老師們無私地傳授知識，還是同學們真誠地互相扶持，都讓我的童年生活變得多姿多彩。在您的呵護下，我們學會了勇敢與堅強。',
+                    '值此佳里國小一百三十週年校慶，請接受我最誠摯的祝願。願佳里國小<span class="essay-highlight">桃李滿天下</span>，歲月沉澱出更多美麗的故事，陪伴更多孩子迎向美好的未來！'
+                ],
+                signature: '學生 ○○○ 敬上',
+                date: '二〇二六年十月十四日',
+                fullRawText: `親愛的佳里國小：\n您好！好久不見，您依然是那麼美麗而慈祥。轉眼間，我即將告別六年的小學生活。在您即將邁入一百三十歲的喜悅時刻，我想對您說聲：「謝謝您！」\n回首這六年，校園裡處處都有令人難忘的回憶。其中，我最鍾愛的角落非遊樂場莫屬。那裡充滿了歡聲笑語，風吹過樹梢傳來沙沙聲，伴隨著同學們盪鞦韆、鬼抓人的尖叫聲。記得下課時，大家一邊愉快地追逐嬉戲，一邊熱烈地討論著剛才的遊戲。儘管偶爾會摔倒或是因為小事爭執，但因為有彼此的包容與微笑，所有不快都會瞬間煙消雲散。這個角落記錄了我們最純真、最無憂無慮的時光。\n感謝學校就像一位慈愛的長者，陪伴我們度過歡樂與挫折。無論是老師們無私地傳授知識，還是同學們真誠地互相扶持，都讓我的童年生活變得多姿多彩。在您的呵護下，我們學會了勇敢與堅強。\n值此佳里國小一百三十週年校慶，請接受我最誠摯的祝願。願佳里國小桃李滿天下，歲月沉澱出更多美麗的故事，陪伴更多孩子迎向美好的未來！\n\n學生 ○○○ 敬上\n二〇二六年十月十四日`,
+                sentence: '<strong>【伴隨與轉折複句】</strong><br>「大家一邊愉快地追逐嬉戲，一邊熱烈地討論著剛才的遊戲。」<br>「儘管偶爾會摔倒或是因為小事爭執，但因為有彼此的包容與微笑，所有不快都會瞬間煙消雲散。」',
+                idioms: [
+                    { word: '煙消雲散', desc: '比喻誤會、委屈或爭吵在微笑互助中瞬間化解無蹤。' },
+                    { word: '多姿多彩', desc: '形容生活、童年經歷豐富多元、充滿情趣。' },
+                    { word: '桃李滿天下', desc: '頌揚母校培育的優秀學生遍佈天下，成才卓越。' },
+                    { word: '無憂無慮', desc: '形容下課在遊戲場嬉鬧時最自在純潔的童心。' },
+                    { word: '互相扶持', desc: '遭遇跌倒與挫折時，同伴伸出雙手真誠相伴。' }
+                ],
+                rhetoric: '<strong>【擬人修辭與擬聲詞】</strong><br>擬人法將百歲佳小化身為「慈愛的長者」；並點綴樹梢「沙沙聲」、笑聲與尖叫聲，充滿立體聽覺生動感。',
+                quotes: [
+                    '「鞦韆盪得再高，也裝不下我們在佳小揮灑的整片藍天。」',
+                    '「童年的磕磕絆絆不是傷痕，而是學會包容與被愛的甜蜜勳章。」',
+                    '「校園如長者，用百年沉澱的臂彎，托舉起一屆又一屆明朗的晴空。」'
+                ],
+                structure: [
+                    { part: '【起】親暱問候與告白', content: '以「好久不見，美麗慈祥」的親切筆法問好，直抒感恩六年的心聲。' },
+                    { part: '【承】活潑趣味的遊戲場', content: '描寫樹梢沙沙聲、盪鞦韆、鬼抓人，並寫跌倒互諒的純真點滴。' },
+                    { part: '【轉】挫折中淬礪勇敢', content: '從嬉鬧昇華至人格養成：在師長教誨與同學扶持中學會包容與堅強。' },
+                    { part: '【合】桃李滿門的慶賀', content: '祝願佳小桃李芬芳，故事代代傳唱，字裡行間洋溢歡欣與驕傲。' }
+                ],
+                tip: '童年生活不只是「開心」，加入「摔倒或爭執」的微小挫折，能讓文章有跌宕起伏，更凸顯「學會包容」的童心成長！',
+                tipKeyword: '生活細節捕捉 × 活潑明朗語調',
+                chartTitle: '範本二：寫作情感雷達評估圖（活潑篇）',
+                chartType: 'radar',
+                chartLabels: ['童心生動感', '景物聽覺描寫', '同儕包容感恩', '校慶祝願深度', '結構層次順暢'],
+                chartData: [95, 90, 88, 92, 90]
+            },
+            {
+                id: 't3',
+                badge: '範本三：靜謐感懷版',
+                spotlight: '聚焦「老榕樹下/圖書館」與學習成長',
+                title: '老榕樹蔭與書卷長廊的心靈停泊',
+                goal: '藉由濃密老榕樹、微風光影與書頁翻動的靜態意象，感念師長如春風化雨般的智慧啟迪，抒發百年書香的深沉敬意。',
+                header: '親愛的佳里國小：',
+                salutation: '您好！',
+                paragraphs: [
+                    '光陰似箭，日月如梭。不知不覺中，我已经走到了小學歲月的尾聲。適逢您<span class="essay-highlight">一百三十歲生日</span>，校園裡人山人海、洋溢著慶典的熱鬧氣氛，也引發了我心中無限的感激。',
+                    '校園裡每個角落都留下了我們的足跡，但我最深刻的記憶，是在樹蔭濃密的<span class="essay-highlight">榕樹下與安靜的圖書館</span>。微風吹過，陽光穿過樹葉灑下點點光影。在那裡，耳邊傳來陣陣琅琅讀書聲與輕微的翻書聲。我和好朋友常常一邊靜靜地沉澱閱讀，一邊分享書中的趣事。這片安詳的角落，不僅開闊了我的視野，更沉澱了我的心靈，成為我童年記憶中最溫暖的港灣。',
+                    '感謝佳里國小為我們營造了這麼良好的學習氛圍。感謝校長與老師們孜孜不倦的教誨，正如<span class="essay-highlight">春風化雨</span>般滋潤著我們的心田；感謝同學們的相知相伴，讓我在學習與探索的路上從不孤單。',
+                    '最後，在佳里國小一百三十週年校慶之際，我獻上最深沉的祝福。願校園永遠充滿生機與活力，願佳里國小的精神<span class="essay-highlight">代代相傳</span>，培育出更多充滿智慧與愛心的學子！'
+                ],
+                signature: '學生 ○○○ 敬上',
+                date: '二〇二六年十月十四日',
+                fullRawText: `親愛的佳里國小：\n您好！光陰似箭，日月如梭。不知不覺中，我已经走到了小學歲月的尾聲。適逢您一百三十歲生日，校園裡人山人海、洋溢著慶典的熱鬧氣氛，也引發了我心中無限的感激。\n校園裡每個角落都留下了我們的足跡，但我最深刻的記憶，是在樹蔭濃密的榕樹下與安靜的圖書館。微風吹過，陽光穿過樹葉灑下點點光影。在那裡，耳邊傳來陣陣琅琅讀書聲與輕微的翻書聲。我和好朋友常常一邊靜靜地沉澱閱讀，一邊分享書中的趣事。這片安詳的角落，不僅開闊了我的視野，更沉澱了我的心靈，成為我童年記憶中最溫暖的港灣。\n感謝佳里國小為我們營造了這麼良好的學習氛圍。感謝校長與老師們孜孜不倦的教誨，正如春風化雨般滋潤著我們的心田；感謝同學們的相知相伴，讓我在學習與探索的路上從不孤單。\n最後，在佳里國小一百三十週年校慶之際，我獻上最深沉的祝福。願校園永遠充滿生機與活力，願佳里國小的精神代代相傳，培育出更多充滿智慧與愛心的學子！\n\n學生 ○○○ 敬上\n二〇二六年十月十四日`,
+                sentence: '<strong>【遞進複句】</strong><br>「這片安詳的角落，不僅開闊了我的視野，更沉澱了我的心靈，成為我童年記憶中最溫暖的港灣。」<br>「一邊靜靜地沉澱閱讀，一邊分享書中的趣事。」',
+                idioms: [
+                    { word: '日月如梭', desc: '比喻時間流逝極為敏捷。' },
+                    { word: '人山人海', desc: '慶典現場人潮湧動，烘托校慶百三十歲華誕盛況。' },
+                    { word: '琅琅讀書聲', desc: '象徵校園清朗優雅的求知與學習氛圍。' },
+                    { word: '孜孜不倦', desc: '形容校長、老師專注奉獻、辛勤誨人不倦的崇高精神。' },
+                    { word: '代代相傳', desc: '薪火相傳，祝福佳小的精神信念綿延不絕。' }
+                ],
+                rhetoric: '<strong>【映襯修辭與動靜襯托】</strong><br>以校慶慶典「人山人海」的動，映襯榕樹下與圖書館「點點光影與翻書聲」的靜；動靜交織，韻味深遠。',
+                quotes: [
+                    '「老榕樹的綠葉是歲月的信箋，在光影斑駁間書寫著百年樹人的答卷。」',
+                    '「書頁輕翻的沙沙聲，是童年心田裡最動聽的泉水聲。」',
+                    '「在寧靜中汲取智慧，在溫暖中孕育翅膀，我們終將飛向更廣闊的長空。」'
+                ],
+                structure: [
+                    { part: '【起】熱鬧慶典與心靈對比', content: '從 130 歲校慶熱鬧人潮中，引出內心沈潛感恩的深情告白。' },
+                    { part: '【承】靜謐榕樹與書香圖書館', content: '以細膩筆觸摹寫斑駁光影、琅琅書聲，刻劃閱讀沉澱心靈的珍貴時光。' },
+                    { part: '【轉】師恩化雨與同儕相知', content: '由閱讀之樂轉向感謝師長孜孜教誨與朋友相知相伴的溫暖支持。' },
+                    { part: '【合】精神薪傳與深沉祝福', content: '祝願佳里國小精神代代相傳，培育充滿智慧與愛心的莘莘學子。' }
+                ],
+                tip: '書寫「靜態場所」時，善用「微風、光影、書聲」等細膩感官，讓讀者彷彿能坐在榕樹下聞到青草香與書香！',
+                tipKeyword: '光影意象經營 × 深邃人文情懷',
+                chartTitle: '範本三：校慶書信寫作核心主題維度佔比',
+                chartType: 'doughnut',
+                chartLabels: ['學習成長與智慧啟蒙 (35%)', '師長辛勤教誨感恩 (25%)', '校園角落溫暖記憶 (25%)', '母校百年薪傳祝福 (15%)'],
+                chartData: [35, 25, 25, 15]
+            }
+        ];
+
+        let currentTemplateId = 't1';
+        let chartInstance = null;
+        let baseFontSize = 17; // px
+        let isSpeaking = false;
+        let speechUtterance = null;
+
+        function initNavigation() {
+            const nav = document.getElementById('nav-tabs');
+            nav.innerHTML = '';
+            
+            const icons = {
+                t1: '🏃‍♂️',
+                t2: '🎈',
+                t3: '📖'
+            };
+
+            templates.forEach((t) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = `nav-link w-full text-left py-3 px-3.5 rounded-2xl flex items-center justify-between text-sm md:text-base border-l-4 transition-all duration-200 ${t.id === currentTemplateId ? 'active' : 'hover:bg-sky-50/70 text-slate-700'}`;
+                button.setAttribute('data-id', t.id);
+                button.innerHTML = `
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-xl">${icons[t.id]}</span>
+                        <div>
+                            <p class="font-bold text-slate-900 leading-tight">${t.badge.split('：')[0]}</p>
+                            <p class="text-xs text-slate-500 mt-0.5">${t.spotlight.replace('聚焦', '')}</p>
+                        </div>
+                    </div>
+                    <span class="text-slate-300 text-xs">➔</span>
+                `;
+                button.onclick = () => selectTemplate(t.id);
+                nav.appendChild(button);
+            });
+        }
+
+        function selectTemplate(id) {
+            if (isSpeaking) {
+                stopSpeech();
+            }
+            currentTemplateId = id;
+
+            // 更新選單 active 狀態
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                if (btn.getAttribute('data-id') === id) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            renderTemplateContent();
+            showToast(`已切換至：${getCurrentTemplate().badge}`, '📑');
+        }
+
+        function getCurrentTemplate() {
+            return templates.find(t => t.id === currentTemplateId) || templates[0];
+        }
+
+        function renderTemplateContent() {
+            const data = getCurrentTemplate();
+
+            // 頂部標籤與目標
+            document.getElementById('section-badge').textContent = data.badge;
+            document.getElementById('section-spotlight').textContent = data.spotlight;
+            document.getElementById('section-title').textContent = data.title;
+            document.getElementById('section-goal').innerHTML = `<strong>寫作定位：</strong>${data.goal}`;
+
+            // 素材百寶箱 - 句型
+            document.getElementById('box-sentence').innerHTML = data.sentence;
+
+            // 素材百寶箱 - 成語清單
+            const idiomsHtml = data.idioms.map(item => `
+                <div class="bg-amber-100/60 p-2.5 rounded-xl border border-amber-200/60">
+                    <span class="font-bold text-amber-900 block text-xs md:text-sm">✦ ${item.word}</span>
+                    <span class="text-xs text-amber-800/90 block mt-0.5">${item.desc}</span>
+                </div>
+            `).join('');
+            document.getElementById('box-idioms').innerHTML = idiomsHtml;
+
+            // 素材百寶箱 - 修辭
+            document.getElementById('box-rhetoric').innerHTML = data.rhetoric;
+
+            // 素材百寶箱 - 佳句
+            const quotesHtml = data.quotes.map(q => `
+                <div class="flex items-start gap-1.5 py-1 text-xs md:text-sm">
+                    <span class="text-emerald-600 font-bold mt-0.5">“</span>
+                    <p class="text-emerald-950 font-medium">${q}</p>
+                </div>
+            `).join('');
+            document.getElementById('box-quotes').innerHTML = quotesHtml;
+
+            // 信件格式渲染
+            const letterBox = document.getElementById('letter-content');
+            letterBox.style.fontSize = `${baseFontSize}px`;
+            letterBox.innerHTML = `
+                <div class="font-black text-sky-950 text-xl md:text-2xl mb-4 tracking-wider">${data.header}</div>
+                <div class="pl-4 space-y-4">
+                    <p class="font-bold text-slate-800">${data.salutation}</p>
+                    ${data.paragraphs.map(p => `<p class="indent-8 leading-relaxed text-slate-700">${p}</p>`).join('')}
+                </div>
+                <div class="mt-8 text-right space-y-1 pr-4">
+                    <p class="font-bold text-slate-900 tracking-wider">${data.signature}</p>
+                    <p class="text-slate-600 tracking-widest text-sm md:text-base">${data.date}</p>
+                </div>
+            `;
+
+            // 結構剖析
+            const structureHtml = data.structure.map(s => `
+                <div class="border-b border-indigo-100 pb-2">
+                    <span class="font-bold text-indigo-950 block">${s.part}</span>
+                    <span class="text-indigo-800/90 text-xs">${s.content}</span>
+                </div>
+            `).join('');
+            document.getElementById('structure-breakdown').innerHTML = structureHtml;
+
+            // 教師小叮嚀
+            document.getElementById('tip-text').textContent = data.tip;
+            document.getElementById('tip-keyword').textContent = data.tipKeyword;
+
+            // 更新圖表副標題與渲染
+            document.getElementById('chart-subtext').textContent = data.chartTitle;
+            renderDynamicChart(data);
+        }
+
+        function renderDynamicChart(data) {
+            const ctx = document.getElementById('essayChart').getContext('2d');
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            let chartConfig = {
+                type: data.chartType,
+                data: {
+                    labels: data.chartLabels,
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Noto Sans TC', sans-serif", size: 12 },
+                                color: '#334155',
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 12,
+                            bodyFont: { family: "'Noto Sans TC', sans-serif" }
+                        }
+                    }
+                }
+            };
+
+            if (data.chartType === 'bar') {
+                chartConfig.data.datasets.push({
+                    label: '同學回憶推薦熱度 (%)',
+                    data: data.chartData,
+                    backgroundColor: [
+                        '#0284C7', '#F59E0B', '#10B981', '#6366F1', '#EC4899'
+                    ],
+                    borderRadius: 10
+                });
+                chartConfig.options.scales = {
+                    y: {
+                        beginAtZero: true,
+                        max: 60,
+                        ticks: { stepSize: 10 }
+                    }
+                };
+                chartConfig.options.plugins.legend.display = false;
+            } else if (data.chartType === 'radar') {
+                chartConfig.data.datasets.push({
+                    label: '範本二表現指數（滿分 100）',
+                    data: data.chartData,
+                    backgroundColor: 'rgba(2, 132, 199, 0.25)',
+                    borderColor: '#0284C7',
+                    pointBackgroundColor: '#0284C7',
+                    pointBorderColor: '#fff',
+                    pointHoverRadius: 6,
+                    borderWidth: 2.5
+                });
+                chartConfig.options.scales = {
+                    r: {
+                        suggestedMin: 60,
+                        suggestedMax: 100,
+                        ticks: { stepSize: 10 }
+                    }
+                };
+            } else if (data.chartType === 'doughnut') {
+                chartConfig.data.datasets.push({
+                    data: data.chartData,
+                    backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'],
+                    borderWidth: 3,
+                    borderColor: '#FFFFFF'
+                });
+            }
+
+            chartInstance = new Chart(ctx, chartConfig);
+        }
+
+        function showToast(message, icon = '✨') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').textContent = message;
+            document.getElementById('toast-icon').textContent = icon;
+            
+            toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 3000);
+        }
+
+        function copyLetterContent() {
+            const data = getCurrentTemplate();
+            const textarea = document.createElement('textarea');
+            textarea.value = data.fullRawText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('已複製整篇書信範文，可直接貼入作業簿或電子檔！', '📋');
+            } catch (err) {
+                showToast('複製功能受瀏覽器限制，請手動複製文字。', '⚠️');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function changeFontSize(delta) {
+            baseFontSize = Math.min(Math.max(baseFontSize + delta * 2, 14), 26);
+            document.getElementById('letter-content').style.fontSize = `${baseFontSize}px`;
+            showToast(`字體大小已調整為 ${baseFontSize}px`, '🔍');
+        }
+
+        function toggleSpeech() {
+            if (!('speechSynthesis' in window)) {
+                showToast('您的瀏覽器不支援語音朗讀功能', '⚠️');
+                return;
+            }
+
+            if (isSpeaking) {
+                stopSpeech();
+            } else {
+                startSpeech();
+            }
+        }
+
+        function startSpeech() {
+            const data = getCurrentTemplate();
+            window.speechSynthesis.cancel();
+
+            // 準備純淨朗讀文字
+            const speakContent = `${data.header}。${data.salutation}。${data.paragraphs.map(p => p.replace(/<[^>]+>/g, '')).join('。')}。${data.signature}。${data.date}。`;
+            
+            speechUtterance = new SpeechSynthesisUtterance(speakContent);
+            speechUtterance.lang = 'zh-TW';
+            speechUtterance.rate = 0.95;
+            speechUtterance.pitch = 1.0;
+
+            speechUtterance.onstart = () => {
+                isSpeaking = true;
+                document.getElementById('speak-text').textContent = '暫停朗讀';
+                document.getElementById('speak-icon').textContent = '⏹️';
+                document.getElementById('btn-speak').classList.add('bg-rose-50', 'text-rose-700', 'border-rose-300');
+                showToast('正在朗讀範文...', '🎙️');
+            };
+
+            speechUtterance.onend = () => {
+                stopSpeech();
+            };
+
+            speechUtterance.onerror = () => {
+                stopSpeech();
+            };
+
+            window.speechSynthesis.speak(speechUtterance);
+        }
+
+        function stopSpeech() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            isSpeaking = false;
+            document.getElementById('speak-text').textContent = '朗讀範文';
+            document.getElementById('speak-icon').textContent = '🔊';
+            document.getElementById('btn-speak').classList.remove('bg-rose-50', 'text-rose-700', 'border-rose-300');
+        }
+
+        window.onload = function() {
+            initNavigation();
+            selectTemplate('t1');
+        };
+    </script>
+</body>
+</html>
