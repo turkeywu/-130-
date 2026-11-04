@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>佳里國小130週年校慶徵文｜低年級組：我眼中的校園</title>
+    <title>佳里國小130週年校慶徵文｜我眼中的校園</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -238,7 +238,7 @@
                         </div>
                     </section>
 
-                    <!-- 圖畫介紹範例各2則（100字以內） -->
+                    <!-- 圖畫介紹範例各2則 -->
                     <section class="mb-6">
                         <div class="flex items-center justify-between mb-5 flex-wrap gap-2">
                             <h3 class="text-2xl font-black text-slate-800 flex items-center gap-2.5">
@@ -417,26 +417,7 @@
             });
         }
 
-        // 語音朗讀功能
-        function speakText(text) {
-            if (!('speechSynthesis' in window)) {
-                showToast('您的瀏覽器不支援語音功能', '⚠️');
-                return;
-            }
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'zh-TW';
-            u.rate = 0.88;
-            window.speechSynthesis.speak(u);
-            showToast('開始慢速為小朋友朗讀...', '📢');
-        }
-
-        // 複製文字
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('已複製範文到剪貼簿囉！', '📋');
-            });
-        }
+        
 
         function showToast(msg, icon = '✨') {
             const t = document.getElementById('toast');
