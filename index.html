@@ -11,15 +11,16 @@
     <style>
         body { 
             font-family: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif; 
-            background: linear-gradient(180deg, #E0F2FE 0%, #F0FDF4 50%, #FFFBEB 100%); 
+            background: linear-gradient(180deg, #E0F2FE 0%, #F0FDF4 40%, #FFFBEB 80%, #FDF2F8 100%); 
             min-height: 100vh;
         }
         .polaroid-card {
             background-color: #ffffff;
-            border-radius: 1.75rem;
-            box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
-            border: 6px solid #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -5px rgba(16, 185, 129, 0.15), 0 10px 15px -5px rgba(0, 0, 0, 0.05);
+            border: 8px solid #ffffff;
         }
+        /* 可愛彩虹紙膠帶效果 */
         .tape-effect {
             position: relative;
         }
@@ -32,64 +33,95 @@
             width: 110px;
             height: 28px;
             background-color: rgba(251, 191, 36, 0.85);
-            border-left: 3px dashed rgba(217, 119, 6, 0.5);
-            border-right: 3px dashed rgba(217, 119, 6, 0.5);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
-            border-radius: 2px;
+            border-left: 3px dashed rgba(217, 119, 6, 0.6);
+            border-right: 3px dashed rgba(217, 119, 6, 0.6);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+            border-radius: 4px;
             z-index: 10;
+        }
+        .tape-pink::after {
+            background-color: rgba(244, 114, 182, 0.85);
+            border-left-color: rgba(190, 24, 93, 0.6);
+            border-right-color: rgba(190, 24, 93, 0.6);
+            transform: translateX(-50%) rotate(2deg);
+        }
+        .tape-blue::after {
+            background-color: rgba(56, 189, 248, 0.85);
+            border-left-color: rgba(2, 132, 199, 0.6);
+            border-right-color: rgba(2, 132, 199, 0.6);
+            transform: translateX(-50%) rotate(-1.5deg);
         }
         .nav-btn {
             transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border-left: 6px solid transparent;
+            border-left: 8px solid transparent;
         }
         .nav-btn.active {
             border-left-color: #059669;
-            background-color: #ECFDF5;
+            background: linear-gradient(90deg, #ECFDF5 0%, #FFFFFF 100%);
             color: #065F46;
-            font-weight: 800;
-            transform: scale(1.03) translateX(5px);
-            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);
+            font-weight: 900;
+            transform: scale(1.04) translateX(6px);
+            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.18);
         }
         .art-frame {
             background-color: #ffffff;
-            border-radius: 1.25rem;
-            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.08);
             border: 4px solid #F1F5F9;
-            transition: transform 0.25s ease, border-color 0.25s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
         }
         .art-frame:hover {
-            transform: translateY(-4px);
-            border-color: #10B981;
+            transform: translateY(-6px) scale(1.01);
+            border-color: #34D399;
+            box-shadow: 0 15px 25px -4px rgba(16, 185, 129, 0.2);
         }
         .dynamic-font-sm { font-size: 1.05rem; line-height: 1.9; }
         .dynamic-font-md { font-size: 1.25rem; line-height: 2.0; }
         .dynamic-font-lg { font-size: 1.45rem; line-height: 2.1; }
     </style>
 </head>
-<body class="text-slate-800 pb-16 relative overflow-x-hidden">
+<body class="text-slate-800 pb-20 relative overflow-x-hidden">
+
+    <!-- 背景超可愛漂浮貼紙裝飾 -->
+    <div class="fixed top-8 left-6 text-4xl opacity-30 pointer-events-none select-none animate-bounce" style="animation-duration: 4s;">🎈</div>
+    <div class="fixed top-28 right-8 text-4xl opacity-30 pointer-events-none select-none animate-pulse">🌞</div>
+    <div class="fixed top-1/3 left-4 text-4xl opacity-25 pointer-events-none select-none">🌸</div>
+    <div class="fixed top-1/2 right-6 text-4xl opacity-30 pointer-events-none select-none">🏫</div>
+    <div class="fixed bottom-36 left-8 text-4xl opacity-25 pointer-events-none select-none animate-bounce" style="animation-duration: 5s;">🐢</div>
+    <div class="fixed bottom-16 right-10 text-4xl opacity-30 pointer-events-none select-none">⚽</div>
+    <div class="fixed top-12 right-1/4 text-4xl opacity-20 pointer-events-none select-none">🌈</div>
+    <div class="fixed bottom-8 left-1/3 text-4xl opacity-20 pointer-events-none select-none">✨</div>
 
     <div class="container mx-auto p-4 md:p-8 max-w-7xl relative z-10">
         
         <!-- 頂部手帳橫幅 -->
         <header class="text-center mb-8 relative max-w-4xl mx-auto py-6">
-            <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 text-sm font-black px-5 py-2 rounded-full border border-emerald-300 shadow-sm mb-3">
-                <span>🎉</span> 佳里國小 130 週年校慶特別徵文 <span>🎉</span>
+            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 via-teal-100 to-amber-100 text-emerald-900 text-sm md:text-base font-black px-6 py-2.5 rounded-full border-2 border-emerald-300 shadow-md mb-4 transform -rotate-1">
+                <span>🎊</span> 佳里國小 130 週年校慶特別徵文 <span>🎊</span>
             </div>
-            <h1 class="text-3xl md:text-5xl font-black text-emerald-950 tracking-tight flex items-center justify-center gap-3">
-                <span>🎨</span> [低年級組] 我眼中的校園
+            
+            <h1 class="text-3xl md:text-5xl font-black text-emerald-950 tracking-tight flex items-center justify-center gap-3 drop-shadow-sm">
+                <span class="animate-bounce" style="animation-duration: 2s;">🎨</span>
+                <span>[低年級組] 我眼中的校園</span>
+                <span class="animate-bounce" style="animation-duration: 2.5s;">🌟</span>
             </h1>
-            <div class="mt-4 inline-block bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl border-2 border-emerald-200 text-emerald-900 font-bold text-sm md:text-base shadow-sm">
-                📌 任務清單：1. 畫出你最喜歡的校園地點 ＆ 2. 依照圖畫寫下文字介紹（100字以內）
+            
+            <div class="mt-4 inline-flex flex-wrap items-center justify-center gap-2 bg-white/95 backdrop-blur-md px-6 py-3.5 rounded-2xl border-2 border-emerald-300 text-emerald-900 font-bold text-sm md:text-base shadow-sm">
+                <span class="flex items-center gap-1.5"><span class="text-lg">🖍️</span> 畫出你最喜歡的校園地點</span>
+                <span class="text-emerald-400 font-black">✦</span>
+                <span class="flex items-center gap-1.5"><span class="text-lg">📝</span> 依照圖畫寫下文字介紹</span>
             </div>
 
             <!-- 字級調整按鈕 -->
-            <div class="mt-5 flex flex-wrap items-center justify-center gap-4">
-                <div class="flex items-center gap-2 bg-white/80 px-4 py-2 rounded-xl border border-emerald-200 shadow-sm">
-                    <span class="text-xs font-bold text-emerald-800">字體大小：</span>
-                    <button onclick="setFontSize('sm')" id="btn-font-sm" class="px-3 py-1 bg-white border border-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-50">小</button>
-                    <button onclick="setFontSize('md')" id="btn-font-md" class="px-3 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold shadow-sm">中</button>
-                    <button onclick="setFontSize('lg')" id="btn-font-lg" class="px-3 py-1 bg-white border border-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-50">大</button>
+            <div class="mt-5 flex items-center justify-center gap-4">
+                <div class="flex items-center gap-2 bg-white/90 px-4 py-2 rounded-2xl border-2 border-emerald-200 shadow-sm">
+                    <span class="text-xs font-black text-emerald-800 flex items-center gap-1">
+                        <span>🔍</span> 字體大小：
+                    </span>
+                    <button onclick="setFontSize('sm')" id="btn-font-sm" class="px-3 py-1 bg-white border border-emerald-300 rounded-xl text-xs font-bold hover:bg-emerald-50 transition">小 A</button>
+                    <button onclick="setFontSize('md')" id="btn-font-md" class="px-3 py-1 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow-sm transition">中 A</button>
+                    <button onclick="setFontSize('lg')" id="btn-font-lg" class="px-3 py-1 bg-white border border-emerald-300 rounded-xl text-xs font-bold hover:bg-emerald-50 transition">大 A</button>
                 </div>
             </div>
         </header>
@@ -99,17 +131,21 @@
             
             <!-- 左側連結分頁按鈕 -->
             <div class="lg:col-span-1 space-y-6">
-                <div class="bg-white/95 backdrop-blur-md p-6 rounded-3xl shadow-lg border border-emerald-100 sticky top-6">
+                <div class="bg-white/95 backdrop-blur-md p-6 rounded-3xl shadow-lg border-2 border-emerald-100 sticky top-6">
                     <h3 class="text-xl font-black text-emerald-950 mb-4 pb-3 border-b-2 border-emerald-100 text-center flex items-center justify-center gap-2">
-                        <span>🧭</span> 校園地點分頁
+                        <span class="text-2xl">🗺️</span>
+                        <span>校園地點分頁</span>
                     </h3>
+                    
                     <nav id="place-nav" class="flex flex-col space-y-3">
                         <!-- 由 JS 生成分頁按鈕 -->
                     </nav>
 
-                    <div class="mt-6 p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs text-emerald-950 leading-relaxed">
-                        <span class="font-black block text-sm mb-1 text-emerald-900">💡 GitHub 部署小提醒：</span>
-                        將本網頁命名為 <code class="bg-white px-1.5 py-0.5 rounded border border-emerald-300 font-bold">index.html</code>，並與 6 張照片（<code class="text-emerald-700 font-bold">building1.jpg</code>、<code class="text-emerald-700 font-bold">garden1.jpg</code> 等）放在同一個倉庫資料夾中，在 GitHub Pages 上就會直接正常顯示囉！
+                    <div class="mt-6 p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border-2 border-amber-200/80 text-xs text-amber-950 leading-relaxed shadow-sm">
+                        <span class="font-black text-sm mb-1.5 text-amber-900 flex items-center gap-1.5">
+                            <span>💡</span> 寫作小魔法：
+                        </span>
+                        請點選上方的地點，跟著右邊的<strong>「圖畫、成語、句型」</strong>一步一步寫，你也能寫出最棒的 100 字校慶小作文喔！✨
                     </div>
                 </div>
             </div>
@@ -118,21 +154,24 @@
             <div class="lg:col-span-3">
                 <main class="polaroid-card p-6 md:p-10 border-t-8 border-emerald-500 relative">
                     
-                    <div class="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                    <div class="mb-6 flex flex-wrap items-center justify-between gap-4 border-b-2 border-slate-100 pb-4">
                         <div>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3 py-1 rounded-full inline-block mb-1" id="place-tag">校園景點</span>
-                            <h2 id="place-title" class="text-3xl md:text-4xl font-black text-emerald-950"></h2>
+                            <span class="bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-800 text-xs font-black px-3.5 py-1.5 rounded-full inline-flex items-center gap-1 mb-1.5" id="place-tag">
+                                <span>📍</span> 校園景點
+                            </span>
+                            <h2 id="place-title" class="text-3xl md:text-4xl font-black text-emerald-950 flex items-center gap-2"></h2>
                         </div>
-                        <div class="bg-emerald-50 px-4 py-2 rounded-2xl border border-emerald-200 text-emerald-900 text-xs font-bold">
-                            🎂 歡慶佳里國小 130 歲校慶
+                        <div class="bg-gradient-to-r from-amber-100 to-orange-100 px-4 py-2 rounded-2xl border border-amber-300 text-amber-900 text-xs font-black flex items-center gap-1.5 shadow-sm">
+                            <span>🎂</span> 佳里國小 130 歲校慶快樂！
                         </div>
                     </div>
 
-                    <!-- 1. 圖畫 -->
+                    <!-- 圖畫 -->
                     <section class="mb-10">
-                        <h3 class="text-xl font-black text-slate-800 mb-4 flex items-center gap-2">
-                            <span class="w-7 h-7 rounded-full bg-emerald-500 text-white inline-flex items-center justify-center text-sm">1</span>
-                            <span>校園圖畫（點擊可放大觀看）</span>
+                        <h3 class="text-xl font-black text-slate-800 mb-4 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-full bg-emerald-500 text-white inline-flex items-center justify-center text-sm font-black shadow-sm"></span>
+                            <span>校園圖畫（點擊可以全螢幕放大看細節喔！）</span>
+                            <span class="text-lg">🔍</span>
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="art-gallery">
                             <!-- 圖畫卡片 -->
@@ -141,61 +180,73 @@
 
                     <!-- 2 ~ 4. 內容、原因、心情感想 -->
                     <section class="mb-10 grid grid-cols-1 md:grid-cols-3 gap-5">
-                        <div class="bg-sky-50/90 p-5 rounded-2xl border border-sky-200 relative tape-effect">
+                        
+                        <!--  圖畫內容 -->
+                        <div class="bg-sky-50/90 p-5 rounded-2xl border-2 border-sky-200 relative tape-effect tape-blue shadow-sm">
                             <h4 class="text-base font-black text-sky-950 mb-2 flex items-center gap-1.5">
-                                <span>🎨</span> 2. 圖畫內容與景色
+                                <span>🎨</span> 圖畫內容與景色
                             </h4>
                             <p id="info-content" class="text-sm text-sky-900 leading-relaxed font-medium"></p>
                         </div>
 
-                        <div class="bg-amber-50/90 p-5 rounded-2xl border border-amber-200 relative tape-effect">
+                        <!-- 喜歡原因 -->
+                        <div class="bg-amber-50/90 p-5 rounded-2xl border-2 border-amber-200 relative tape-effect shadow-sm">
                             <h4 class="text-base font-black text-amber-950 mb-2 flex items-center gap-1.5">
-                                <span>💖</span> 3. 為什麼喜歡這裡
+                                <span>💖</span> 為什麼喜歡這裡
                             </h4>
                             <p id="info-reason" class="text-sm text-amber-900 leading-relaxed font-medium"></p>
                         </div>
 
-                        <div class="bg-rose-50/90 p-5 rounded-2xl border border-rose-200 relative tape-effect">
+                        <!-- 心情感想 -->
+                        <div class="bg-rose-50/90 p-5 rounded-2xl border-2 border-rose-200 relative tape-effect tape-pink shadow-sm">
                             <h4 class="text-base font-black text-rose-950 mb-2 flex items-center gap-1.5">
-                                <span>🌈</span> 4. 心情感想
+                                <span>🌈</span> 心情感想
                             </h4>
                             <p id="info-feeling" class="text-sm text-rose-900 leading-relaxed font-medium"></p>
                         </div>
                     </section>
 
-                    <!-- 5 ~ 7. 成語、句型、佳句 -->
-                    <section class="mb-10 bg-emerald-50/70 p-6 md:p-8 rounded-3xl border border-emerald-200/80">
+                    <!-- 5 ~ 成語、句型、佳句 -->
+                    <section class="mb-10 bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50/40 p-6 md:p-8 rounded-3xl border-2 border-emerald-200/90 shadow-sm">
                         <h3 class="text-2xl font-black text-emerald-950 mb-6 flex items-center gap-2">
-                            <span>🎁</span> 寫作百寶箱（低年級適用）
+                            <span>🎁</span>
+                            <span>寫作百寶箱</span>
+                            <span class="text-lg">🎈</span>
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <!-- 成語 -->
-                            <div class="bg-white p-4 rounded-2xl border border-emerald-200 shadow-sm">
-                                <span class="px-2.5 py-1 rounded-md text-xs font-black bg-amber-100 text-amber-900 inline-block mb-3">📚 5. 成語</span>
-                                <div id="box-idioms" class="space-y-2"></div>
+                            <div class="bg-white p-5 rounded-2xl border-2 border-amber-200 shadow-sm">
+                                <span class="px-3 py-1 rounded-xl text-xs font-black bg-amber-100 text-amber-900 inline-flex items-center gap-1 mb-3">
+                                    <span>📚</span> 推薦成語
+                                </span>
+                                <div id="box-idioms" class="space-y-2.5"></div>
                             </div>
                             <!-- 句型 -->
-                            <div class="bg-white p-4 rounded-2xl border border-emerald-200 shadow-sm">
-                                <span class="px-2.5 py-1 rounded-md text-xs font-black bg-sky-100 text-sky-900 inline-block mb-3">🎯 6. 句型</span>
+                            <div class="bg-white p-5 rounded-2xl border-2 border-sky-200 shadow-sm">
+                                <span class="px-3 py-1 rounded-xl text-xs font-black bg-sky-100 text-sky-900 inline-flex items-center gap-1 mb-3">
+                                    <span>🎯</span> 必學句型
+                                </span>
                                 <div id="box-patterns" class="space-y-3"></div>
                             </div>
                             <!-- 佳句 -->
-                            <div class="bg-white p-4 rounded-2xl border border-emerald-200 shadow-sm">
-                                <span class="px-2.5 py-1 rounded-md text-xs font-black bg-rose-100 text-rose-900 inline-block mb-3">✨ 7. 佳句</span>
-                                <div id="box-quotes" class="space-y-2"></div>
+                            <div class="bg-white p-5 rounded-2xl border-2 border-rose-200 shadow-sm">
+                                <span class="px-3 py-1 rounded-xl text-xs font-black bg-rose-100 text-rose-900 inline-flex items-center gap-1 mb-3">
+                                    <span>✨</span> 亮點佳句
+                                </span>
+                                <div id="box-quotes" class="space-y-2.5"></div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- 8. 圖畫介紹範例各2則（100字以內） -->
+                    <!-- 圖畫介紹範例各2則（100字以內） -->
                     <section class="mb-6">
-                        <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
-                            <h3 class="text-2xl font-black text-slate-800 flex items-center gap-2">
-                                <span class="w-7 h-7 rounded-full bg-emerald-500 text-white inline-flex items-center justify-center text-sm">8</span>
-                                <span>圖畫介紹範例（各 2 則・100字以內）</span>
+                        <div class="flex items-center justify-between mb-5 flex-wrap gap-2">
+                            <h3 class="text-2xl font-black text-slate-800 flex items-center gap-2.5">
+                                <span class="w-8 h-8 rounded-full bg-emerald-500 text-white inline-flex items-center justify-center text-sm font-black shadow-sm"></span>
+                                <span>圖畫介紹範例</span>
                             </h3>
-                            <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">
-                                包含句型、成語與佳句
+                            <span class="text-xs bg-emerald-100 text-emerald-900 font-bold px-3.5 py-1.5 rounded-full border border-emerald-300 flex items-center gap-1">
+                                <span>🏆</span> 包含成語、句型與佳句
                             </span>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="examples-container">
@@ -209,53 +260,58 @@
     </div>
 
     <!-- 圖片點擊放大彈窗 -->
-    <div id="image-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeModal()">
-        <div class="relative max-w-4xl max-h-[90vh] bg-white p-3 rounded-3xl shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
-            <button onclick="closeModal()" class="absolute top-4 right-4 bg-slate-800 text-white w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg z-20 hover:bg-slate-700">✕</button>
+    <div id="image-modal" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeModal()">
+        <div class="relative max-w-4xl max-h-[90vh] bg-white p-3.5 rounded-3xl shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-900 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg z-20 shadow-md">✕</button>
             <img id="modal-img" src="" alt="放大欣賞" class="max-h-[75vh] w-auto mx-auto rounded-2xl object-contain">
-            <p id="modal-caption" class="text-center font-bold text-slate-700 text-sm md:text-base mt-3 pb-1"></p>
+            <p id="modal-caption" class="text-center font-black text-slate-800 text-sm md:text-base mt-3 pb-1 flex items-center justify-center gap-2">
+                <span>🖼️</span> <span id="modal-caption-text"></span>
+            </p>
         </div>
     </div>
 
     <!-- 提示框 -->
-    <div id="toast" class="fixed bottom-6 right-6 bg-slate-800 text-white px-5 py-3 rounded-2xl shadow-2xl opacity-0 transform translate-y-3 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2 text-sm font-bold">
+    <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl opacity-0 transform translate-y-3 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2 text-sm font-bold">
         <span id="toast-icon">✨</span> <span id="toast-msg">提示訊息</span>
     </div>
 
     <script>
-        // 景點資料定義：已重新連結檔名為 building, grass, garden
+        // 景點資料定義：連結檔名為 building, grass, garden
         const campusData = {
             "教學大樓": {
                 title: "🏫 教學大樓",
+                icon: "🏫",
                 tag: "琅琅讀書聲的智慧城堡",
                 photos: [
-                    { filename: "building1.jpg", name: "美麗的彩繪大樓 (3號)", badge: "編號 3", desc: "尖尖的紅色屋頂與黃色校舍，大家背著書包在校門口開心打招呼！" },
-                    { filename: "building2.jpg", name: "熱鬧的橙色城堡 (25號)", badge: "編號 25", desc: "像大城堡一樣的三層樓教室，窗戶整整齊齊，還有可愛的圓鐘樓。" }
+                    { filename: "building1.jpg", name: "美麗的彩繪大樓 ", badge: "3", icon: "🎒", desc: "尖尖的紅色屋頂與黃色校舍，大家背著書包在校門口開心打招呼！" },
+                    { filename: "building2.jpg", name: "熱鬧的橙色城堡 ", badge: "25", icon: "🏰", desc: "像大城堡一樣的三層樓教室，窗戶整整齊齊，還有可愛的圓鐘樓。" }
                 ],
-                content: "圖畫裡有高大漂亮的黃色教學大樓，一間間整齊明亮的教室，還有尖尖的紅色屋頂。天空很藍，小朋友們背著書包在大門口開心地互相打招呼。",
-                reason: "因為這裡是我們每天上課學知識的好地方。老師親切地教我們讀書寫字，下課時走廊上充滿了我和好朋友的歡笑聲，就像一座溫暖的大城堡。",
-                feeling: "在教學大樓裡學習我覺得很充實也很安心。今年佳里國小一百三十歲了，我好想對這座美麗的大樓大聲說：「謝謝您天天陪伴我們快樂長大！」",
+                content: "圖畫裡有高大漂亮的黃色教學大樓，一間間整齊明亮的教室，還有尖尖的紅色屋頂。天空很藍，小朋友們背著書包在大門口開心地互相打招呼。🌞",
+                reason: "因為這裡是我們每天上課學知識的好地方。老師親切地教我們讀書寫字，下課時走廊上充滿了我和好朋友的歡笑聲，就像一座溫暖的大城堡。🎈",
+                feeling: "在教學大樓裡學習我覺得很充實也很安心。今年佳里國小一百三十歲了，我好想對這座美麗的大樓大聲說：「謝謝您天天陪伴我們快樂長大！」🎉",
                 idioms: [
-                    { word: "書聲琅琅", desc: "形容大家一起大聲讀書的聲音很好聽。" },
-                    { word: "春風化雨", desc: "稱讚老師像溫暖春風一樣細心教導我們。" },
-                    { word: "煥然一新", desc: "形容校舍整理得非常乾淨整齊、很漂亮。" }
+                    { word: "書聲琅琅", icon: "📖", desc: "形容大家一起大聲讀書的聲音很好聽。" },
+                    { word: "春風化雨", icon: "🌱", desc: "稱讚老師像溫暖春風一樣細心教導我們。" },
+                    { word: "煥然一新", icon: "✨", desc: "形容校舍整理得非常乾淨整齊、很漂亮。" }
                 ],
                 patterns: [
                     { name: "一邊……一邊……", exp: "我們在走廊上一邊看著風景，一邊開心地聊天。" },
                     { name: "只要……就……", exp: "只要走進明亮的教室，我的心情就會變得很好。" }
                 ],
                 quotes: [
-                    "「教學大樓就像一座裝滿智慧的大城堡。」",
-                    "「琅琅的讀書聲，是校園裡最動聽的音樂。」"
+                    "「教學大樓就像一座裝滿智慧的大城堡。」🏰",
+                    "「琅琅的讀書聲，是校園裡最動聽的音樂。」🎶"
                 ],
                 examples: [
                     {
                         title: "範例一：智慧的大城堡",
+                        tag: "城堡主題",
                         content: "高大的教學大樓就像一座裝滿智慧的大城堡。教室裡天天書聲琅琅，只要走進這棟大樓，我就覺得很幸福。老師春風化雨般教導我們，我在這裡學到了好多知識，祝佳里國小一百三十歲生日快樂！",
                         wordCount: 97
                     },
                     {
                         title: "範例二：走廊上的歡笑",
+                        tag: "友誼主題",
                         content: "校舍在陽光下煥然一新，美麗又溫馨。每天下課時，我常常一邊散步，一邊和好朋友分享故事。老師春風化雨的照顧，讓學校就像一座大城堡，保護著我們健康長大，我最喜歡教學大樓了！",
                         wordCount: 94
                     }
@@ -263,35 +319,38 @@
             },
             "操場": {
                 title: "⚽ 操場",
+                icon: "⚽",
                 tag: "揮灑汗水與活力的綠茵天地",
                 photos: [
-                    { filename: "grass1.jpg", name: "草地足球趣味賽 (11號)", badge: "編號 11", desc: "大家在翠綠草地上熱情踢足球，裁判老師在旁邊吹哨子加油！" },
-                    { filename: "grass2.jpg", name: "帥氣倒掛金鉤 (7號)", badge: "編號 7", desc: "蔚藍的天空下，我們穿著藍色球衣飛身救球，連太陽公公都在微笑。" }
+                    { filename: "grass1.jpg", name: "草地足球趣味賽", badge: "11", icon: "🏃", desc: "大家在翠綠草地上熱情踢足球，裁判老師在旁邊吹哨子加油！" },
+                    { filename: "grass2.jpg", name: "帥氣倒掛金鉤", badge: "7", icon: "⚡", desc: "蔚藍的天空下，我們穿著藍色球衣飛身救球，連太陽公公都在微笑。" }
                 ],
-                content: "畫圖裡有一大片綠油油的草地，太陽公公露出燦爛的微笑。大家穿著運動服在球門前熱烈地踢足球，連天上的小鳥都飛過來幫我們加油呢！",
-                reason: "因為操場非常遼闊，下課時我可以盡情地奔跑、追逐。不管是體育課踢球還是大隊接力，我和同學都能在這裡流下努力的汗水，學會團結。",
-                feeling: "每次在操場跑步運動後，我的身體都變健康了，心情也變得像藍天一樣開朗。大操場見證了我們的成長與友誼，是我最愛的天堂。",
+                content: "畫圖裡有一大片綠油油的草地，太陽公公露出燦爛的微笑。大家穿著運動服在球門前熱烈地踢足球，連天上的小鳥都飛過來幫我們加油呢！🐦",
+                reason: "因為操場非常遼闊，下課時我可以盡情地奔跑、追逐。不管是體育課踢球還是大隊接力，我和同學都能在這裡流下努力的汗水，學會團結。🏃",
+                feeling: "每次在操場跑步運動後，我的身體都變健康了，心情也變得像藍天一樣開朗。大操場見證了我們的成長與友誼，是我最愛的天堂。🌈",
                 idioms: [
-                    { word: "生龍活虎", desc: "形容小朋友們跑跑跳跳、非常有活力的樣子。" },
-                    { word: "同心協力", desc: "大家團結在一起，共同努力完成一件事。" },
-                    { word: "響徹雲霄", desc: "歡呼聲和大笑聲非常大聲，傳到了天空。" }
+                    { word: "生龍活虎", icon: "🐯", desc: "形容小朋友們跑跑跳跳、非常有活力的樣子。" },
+                    { word: "同心協力", icon: "🤝", desc: "大家團結在一起，共同努力完成一件事。" },
+                    { word: "響徹雲霄", icon: "📢", desc: "歡呼聲和大笑聲非常大聲，傳到了天空。" }
                 ],
                 patterns: [
                     { name: "不僅……也……", exp: "在操場奔跑不僅能鍛鍊身體，也讓我們交到好朋友。" },
                     { name: "每當……便……", exp: "每當下課鐘聲響起，操場便立刻熱鬧起來。" }
                 ],
                 quotes: [
-                    "「綠綠的操場，記錄了我們童年最奔放的歡笑。」",
-                    "「每一次奮力奔跑，都是迎接未來的勇氣。」"
+                    "「綠綠的操場，記錄了我們童年最奔放的歡笑。」🎈",
+                    "「每一次奮力奔跑，都是迎接未來的勇氣。」🏃"
                 ],
                 examples: [
                     {
                         title: "範例一：生龍活虎踢足球",
+                        tag: "運動精神",
                         content: "綠油油的操場記錄了我們最奔放的歡笑。每當體育課時，大家便化身為生龍活虎的小球員。我們同心協力踢足球，歡呼聲響徹雲霄。在操場運動不僅讓身體更健康，也讓我學會團結，我最愛大操場了！",
                         wordCount: 97
                     },
                     {
                         title: "範例二：熱鬧的加油聲",
+                        tag: "友誼團結",
                         content: "大操場是我們快樂的天堂。每當微風吹過，大家便一邊跑步一邊為同學加油，加油聲響徹雲霄！大家同心協力贏得比賽，綠綠的操場不僅留下我們努力的汗水，也見證了最好的友誼，祝學校生日快樂！",
                         wordCount: 96
                     }
@@ -299,35 +358,38 @@
             },
             "祥園生態池": {
                 title: "🐢 祥園生態池",
+                icon: "🐢",
                 tag: "水草烏龜同樂的自然寶庫",
                 photos: [
-                    { filename: "garden1.jpg", name: "烏龜池塘與石子路 (19號)", badge: "編號 19", desc: "大石頭上寫著祥園，池裡有睡蓮、金魚與烏龜，我們排著隊觀察生態。" },
-                    { filename: "garden2.jpg", name: "花草大樹的樂園 (16號)", badge: "編號 16", desc: "池畔有兩棵大樹，蝴蝶蜜蜂在花叢飛舞，小烏龜在荷葉上悠閒曬太陽。" }
+                    { filename: "garden1.jpg", name: "烏龜池塘與石子路", badge: "19", icon: "🪨", desc: "大石頭上寫著祥園，池裡有睡蓮、金魚與烏龜，我們排著隊觀察生態。" },
+                    { filename: "garden2.jpg", name: "花草大樹的樂園", badge: "16", icon: "🌸", desc: "池畔有兩棵大樹，蝴蝶蜜蜂在花叢飛舞，小烏龜在荷葉上悠閒曬太陽。" }
                 ],
-                content: "畫圖裡有清澈漂亮的生態池，大石頭上刻著「祥園」。池塘裡有可愛的小烏龜在荷葉上曬太陽，橘色的小金魚在水草間游來游去，岸邊還開滿了美麗的花朵。",
-                reason: "因為祥園就像校園裡的小森林，非常安靜清涼。下課走過來，可以近距離看到小烏龜伸出頭、蝴蝶在花間飛舞，讓我認識了好多大自然的小生命。",
-                feeling: "看著池塘裡悠閒游動的小魚，我一整天的煩惱都消失了。祥園是充滿生機與愛心的小天地，希望這座美麗的小花園能一直陪伴我們！",
+                content: "畫圖裡有清澈漂亮的生態池，大石頭上刻著「祥園」。池塘裡有可愛的小烏龜在荷葉上曬太陽，橘色的小金魚在水草間游來游去，岸邊還開滿了美麗的花朵。🌺",
+                reason: "因為祥園就像校園裡的小森林，非常安靜清涼。下課走過來，可以近距離看到小烏龜伸出頭、蝴蝶在花間飛舞，讓我認識了好多大自然的小生命。🐝",
+                feeling: "看著池塘裡悠閒游動的小魚，我一整天的煩惱都消失了。祥園是充滿生機與愛心的小天地，希望這座美麗的小花園能一直陪伴我們！🌿",
                 idioms: [
-                    { word: "生機盎然", desc: "形容動植物非常多、到處充滿活潑的生命力。" },
-                    { word: "悠然自得", desc: "形容小魚小烏龜無憂無慮、很自在放鬆的樣子。" },
-                    { word: "欣欣向榮", desc: "形容花草樹木長得非常繁盛美麗。" }
+                    { word: "生機盎然", icon: "🌱", desc: "形容動植物非常多、到處充滿活潑的生命力。" },
+                    { word: "悠然自得", icon: "🐟", desc: "形容小魚小烏龜無憂無慮、很自在放鬆的樣子。" },
+                    { word: "欣欣向榮", icon: "🌻", desc: "形容花草樹木長得非常繁盛美麗。" }
                 ],
                 patterns: [
                     { name: "有的……有的……", exp: "水裡的小動物真可愛，有的在曬太陽，有的在游泳。" },
                     { name: "雖然……但是……", exp: "雖然祥園小小的，但是裡面藏著好多自然驚喜。" }
                 ],
                 quotes: [
-                    "「祥園就像校園裡一顆亮晶晶的綠寶石。」",
-                    "「清澈的池水，倒映著大自然最美麗的笑容。」"
+                    "「祥園就像校園裡一顆亮晶晶的綠寶石。」💎",
+                    "「清澈的池水，倒映著大自然最美麗的笑容。」🌊"
                 ],
                 examples: [
                     {
                         title: "範例一：綠寶石小花園",
+                        tag: "生態觀察",
                         content: "祥園就像一顆亮晶晶的綠寶石，池塘邊花草欣欣向榮。池裡生機盎然，有的烏龜在曬太陽，有的金魚在游水，悠然自得好快樂。雖然祥園不大，但是帶給我無限驚喜，祝美麗的佳里國小校慶快樂！",
                         wordCount: 95
                     },
                     {
                         title: "範例二：悠閒自然課",
+                        tag: "生命教育",
                         content: "我最喜歡漫步在生機盎然的祥園生態池。水草欣欣向榮，小烏龜悠然自得地游水，清澈的池水倒映著大自然的笑容。看著小動物雖然不會說話，但是讓我懂得愛護生命，祥園是我心中最溫暖的角落。",
                         wordCount: 96
                     }
@@ -344,9 +406,9 @@
             ['sm', 'md', 'lg'].forEach(s => {
                 const btn = document.getElementById(`btn-font-${s}`);
                 if (s === size) {
-                    btn.className = "px-3 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold shadow-sm";
+                    btn.className = "px-3 py-1 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow-sm transition";
                 } else {
-                    btn.className = "px-3 py-1 bg-white border border-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-50";
+                    btn.className = "px-3 py-1 bg-white border border-emerald-300 rounded-xl text-xs font-bold hover:bg-emerald-50 transition";
                 }
             });
             const contentClass = `dynamic-font-${size}`;
@@ -366,13 +428,13 @@
             u.lang = 'zh-TW';
             u.rate = 0.88;
             window.speechSynthesis.speak(u);
-            showToast('開始慢速為小朋友朗讀...', '🔊');
+            showToast('開始慢速為小朋友朗讀...', '📢');
         }
 
         // 複製文字
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showToast('已複製範文到剪貼簿！', '📋');
+                showToast('已複製範文到剪貼簿囉！', '📋');
             });
         }
 
@@ -392,7 +454,7 @@
         function openModal(imgSrc, caption) {
             const modal = document.getElementById('image-modal');
             document.getElementById('modal-img').src = imgSrc;
-            document.getElementById('modal-caption').textContent = caption;
+            document.getElementById('modal-caption-text').textContent = caption;
             modal.classList.remove('opacity-0', 'pointer-events-none');
             modal.classList.add('opacity-100');
         }
@@ -409,27 +471,30 @@
             const data = campusData[key];
 
             document.getElementById('place-title').textContent = data.title;
-            document.getElementById('place-tag').textContent = data.tag;
+            document.getElementById('place-tag').innerHTML = `<span>📍</span> ${data.tag}`;
 
-            // 1. 圖畫作品渲染（使用標準相對路徑）
+            // 1. 圖畫作品渲染（使用 GitHub 相對路徑）
             const gallery = document.getElementById('art-gallery');
             gallery.innerHTML = data.photos.map(p => {
                 return `
-                <div class="art-frame p-3 bg-white" onclick="openModal('${p.filename}', '${p.name}')">
-                    <div class="w-full h-56 md:h-64 rounded-xl overflow-hidden bg-slate-100 relative flex items-center justify-center border border-slate-200">
+                <div class="art-frame p-3.5 bg-white" onclick="openModal('${p.filename}', '${p.name}')">
+                    <div class="w-full h-56 md:h-64 rounded-2xl overflow-hidden bg-slate-100 relative flex items-center justify-center border-2 border-slate-100">
                         <img src="${p.filename}" 
                              alt="${p.name}" 
                              class="w-full h-full object-contain bg-slate-50 transition-transform duration-300 hover:scale-105"
                              loading="lazy">
-                        <span class="absolute top-2 left-2 bg-slate-900/75 text-white text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
-                            ${p.badge}
+                        <span class="absolute top-2.5 left-2.5 bg-slate-900/80 text-white text-[11px] font-black px-3 py-1 rounded-full backdrop-blur-sm shadow-sm flex items-center gap-1">
+                            <span>${p.icon}</span> ${p.badge}
+                        </span>
+                        <span class="absolute bottom-2.5 right-2.5 bg-white/90 text-slate-800 text-[10px] font-black px-2.5 py-0.5 rounded-lg shadow-sm">
+                            點擊放大 🔍
                         </span>
                     </div>
-                    <div class="mt-2.5 px-1 text-center">
-                        <h4 class="font-bold text-slate-800 text-sm md:text-base">
-                            🖼️ ${p.name}
+                    <div class="mt-3 px-1 text-center">
+                        <h4 class="font-black text-slate-800 text-sm md:text-base flex items-center justify-center gap-1.5">
+                            <span>🖼️</span> ${p.name}
                         </h4>
-                        <p class="text-xs text-slate-500 mt-1">${p.desc}</p>
+                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">${p.desc}</p>
                     </div>
                 </div>
             `}).join('');
@@ -441,50 +506,54 @@
 
             // 5. 成語
             document.getElementById('box-idioms').innerHTML = data.idioms.map(i => `
-                <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200">
-                    <span class="font-bold text-amber-950 block text-sm">🔸 ${i.word}</span>
-                    <span class="text-xs text-amber-800 block mt-0.5">${i.desc}</span>
+                <div class="p-3 rounded-2xl bg-amber-50/80 border border-amber-200 shadow-xs">
+                    <span class="font-black text-amber-950 flex items-center gap-1.5 text-sm">
+                        <span>${i.icon}</span> ${i.word}
+                    </span>
+                    <span class="text-xs text-amber-800/90 block mt-1 leading-snug pl-5">${i.desc}</span>
                 </div>
             `).join('');
 
             // 6. 句型
             document.getElementById('box-patterns').innerHTML = data.patterns.map(p => `
-                <div class="p-2.5 rounded-xl bg-sky-50 border border-sky-200">
-                    <span class="font-bold text-sky-950 block text-xs">🔹 【${p.name}】</span>
-                    <span class="text-xs text-sky-900 block mt-1">${p.exp}</span>
+                <div class="p-3 rounded-2xl bg-sky-50/80 border border-sky-200 shadow-xs">
+                    <span class="font-black text-sky-950 flex items-center gap-1 text-xs">
+                        <span>🔹</span> 【${p.name}】
+                    </span>
+                    <span class="text-xs text-sky-900 block mt-1.5 leading-snug pl-3">${p.exp}</span>
                 </div>
             `).join('');
 
             // 7. 佳句
             document.getElementById('box-quotes').innerHTML = data.quotes.map(q => `
-                <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 flex items-start gap-1.5">
-                    <span class="text-rose-500 text-xs mt-0.5">🌸</span>
+                <div class="p-3 rounded-2xl bg-rose-50/80 border border-rose-200 flex items-start gap-2 shadow-xs">
+                    <span class="text-rose-500 text-sm mt-0.5">🌸</span>
                     <span class="text-xs text-rose-950 font-bold leading-relaxed">${q}</span>
                 </div>
             `).join('');
 
-            // 8. 範例各2則（100字內）
+            // 範例各2則（100字內）
             const examplesContainer = document.getElementById('examples-container');
             const fontClass = `dynamic-font-${currentFontSize}`;
             examplesContainer.innerHTML = data.examples.map(ex => `
-                <div class="bg-white p-6 rounded-2xl border-2 border-emerald-200/90 shadow-sm flex flex-col justify-between">
+                <div class="bg-white p-6 rounded-3xl border-2 border-emerald-200/90 shadow-sm flex flex-col justify-between hover:border-emerald-300 transition">
                     <div>
-                        <div class="flex items-center justify-between mb-3 border-b border-emerald-100 pb-2">
-                            <span class="font-black text-emerald-950 text-base">
-                                📝 ${ex.title}
+                        <div class="flex items-center justify-between mb-3.5 border-b border-emerald-100 pb-2.5">
+                            <span class="font-black text-emerald-950 text-base flex items-center gap-1.5">
+                                <span>📝</span> ${ex.title}
                             </span>
-                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                            <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
                                 計 ${ex.content.length} 字 (符合100字內)
                             </span>
                         </div>
                         <p class="sample-text text-slate-800 ${fontClass} font-medium leading-relaxed">${ex.content}</p>
                     </div>
-                    <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
-                        <button onclick="speakText('${ex.content}')" class="px-3.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center gap-1 transition">
-                            <span>🔊</span> 慢速朗讀
+                    <div class="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-end gap-2.5">
+                        <button onclick="speakText('${ex.content}')" class="px-3.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-black rounded-xl flex items-center gap-1.5 transition">
+                            <span>📢</span> 慢速朗讀
                         </button>
-                        <button onclick="copyText('${ex.content}')" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl text-white shadow-sm flex items-center gap-1 transition">
-                            <span>📋</span> 複製範文
+                        <button onclick="copyText('${ex.content}')" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-xl shadow-sm flex items-center gap-1.5 transition">
+                            <span>📑</span> 複製範文
                         </button>
                     </div>
                 </div>
@@ -498,8 +567,8 @@
 
             places.forEach(p => {
                 const btn = document.createElement('button');
-                btn.className = `nav-btn w-full text-left py-3.5 px-4 rounded-2xl font-bold text-slate-700 hover:bg-emerald-50 flex items-center justify-between text-base border-l-4`;
-                btn.innerHTML = `<span>${campusData[p].title}</span><span class="text-xs opacity-50">➔</span>`;
+                btn.className = `nav-btn w-full text-left py-3.5 px-4 rounded-2xl font-black text-slate-700 hover:bg-emerald-50 flex items-center justify-between text-base border-l-4`;
+                btn.innerHTML = `<span class="flex items-center gap-2">${campusData[p].title}</span><span class="text-xs text-emerald-600 font-black">點擊查看 ➔</span>`;
                 btn.onclick = () => {
                     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
